@@ -767,9 +767,9 @@
     }
 
     // Stagger start times so all three don't fire simultaneously
-    setTimeout(() => setInterval(() => cycleWord('cycle-1'), 2200), 0);
-    setTimeout(() => setInterval(() => cycleWord('cycle-2'), 2200), 700);
-    setTimeout(() => setInterval(() => cycleWord('cycle-3'), 2200), 1400);
+    setInterval(() => cycleWord('cycle-1'), 2200);
+    setInterval(() => cycleWord('cycle-2'), 2200);
+    setInterval(() => cycleWord('cycle-3'), 2200);
   </script>
 </body>
 </html>
