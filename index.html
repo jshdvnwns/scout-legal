@@ -3,57 +3,77 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Scout — Recommendations from people you trust</title>
+  <title>Scout — Never lose a great find again</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --ink: #1a1a1a;
-      --ink-light: #555;
-      --ink-faint: #999;
-      --bg: #faf9f7;
-      --cream: #f3f0eb;
-      --accent: #c8a96e;
-      --accent-dark: #a88850;
+      --rust: #C8522A;
+      --green: #34C759;
+      --sand: #F5EFE3;
+      --dune: #E8E0D0;
+      --ink: #1C1A17;
+      --ink-mid: #666260;
+      --ink-faint: #9E9B94;
       --white: #ffffff;
-      --border: #e5e0d8;
-      --radius: 12px;
     }
 
     html { scroll-behavior: smooth; }
 
     body {
       font-family: 'DM Sans', sans-serif;
-      background: var(--bg);
+      background: var(--sand);
       color: var(--ink);
       font-size: 16px;
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
     }
 
-    /* NAV */
+    /* ── NAV ── */
     nav {
       position: fixed;
       top: 0; left: 0; right: 0;
       z-index: 100;
-      padding: 18px 40px;
+      padding: 14px 48px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      background: rgba(250, 249, 247, 0.92);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
+      background: rgba(245, 239, 227, 0.94);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--dune);
     }
 
     .nav-logo {
-      font-family: 'Playfair Display', serif;
-      font-size: 22px;
-      font-weight: 500;
-      letter-spacing: 0.04em;
-      color: var(--ink);
       text-decoration: none;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 3px;
+      width: 120px;
+    }
+
+    .nav-bubble-green {
+      background: var(--green);
+      color: #fff;
+      font-size: 10px;
+      font-weight: 500;
+      padding: 4px 9px;
+      border-radius: 10px 10px 2px 10px;
+      display: inline-block;
+      align-self: flex-end;
+    }
+
+    .nav-bubble-grey {
+      background: #DDDDD8;
+      color: var(--ink);
+      font-size: 10px;
+      font-weight: 400;
+      padding: 4px 9px;
+      border-radius: 10px 10px 10px 2px;
+      display: inline-block;
+      align-self: flex-start;
     }
 
     .nav-links {
@@ -61,411 +81,401 @@
       gap: 32px;
       list-style: none;
     }
-
     .nav-links a {
       font-size: 14px;
       font-weight: 400;
-      color: var(--ink-light);
+      color: var(--ink-mid);
       text-decoration: none;
       transition: color 0.2s;
     }
-
     .nav-links a:hover { color: var(--ink); }
 
-    /* HERO */
+    /* ── HERO ── */
     .hero {
       min-height: 100vh;
       display: flex;
       align-items: center;
-      padding: 120px 40px 80px;
-      max-width: 1100px;
-      margin: 0 auto;
+      justify-content: center;
+      padding: 120px 32px 80px;
+      text-align: center;
     }
 
     .hero-inner {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 80px;
+      max-width: 520px;
+      display: flex;
+      flex-direction: column;
       align-items: center;
+      gap: 32px;
+    }
+
+    /* Hero logo thread */
+    .hero-logo {
+      display: flex;
+      flex-direction: column;
       width: 100%;
+      max-width: 340px;
+      gap: 5px;
     }
 
-    .hero-text {}
-
-    .hero-eyebrow {
-      display: inline-block;
-      font-size: 11px;
+    .hero-bubble-green {
+      background: var(--green);
+      color: #fff;
+      font-size: clamp(15px, 3.5vw, 19px);
       font-weight: 500;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--accent-dark);
-      margin-bottom: 20px;
-      padding: 6px 14px;
-      background: rgba(200, 169, 110, 0.12);
-      border-radius: 100px;
+      padding: 11px 18px;
+      border-radius: 20px 20px 4px 20px;
+      display: inline-block;
+      align-self: flex-end;
+      line-height: 1.3;
     }
 
-    h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(38px, 5vw, 58px);
-      font-weight: 400;
-      line-height: 1.15;
+    .hero-bubble-grey {
+      background: #DDDDD8;
       color: var(--ink);
-      margin-bottom: 24px;
-      letter-spacing: -0.01em;
+      font-size: clamp(15px, 3.5vw, 19px);
+      font-weight: 400;
+      padding: 11px 18px;
+      border-radius: 20px 20px 20px 4px;
+      display: inline-block;
+      align-self: flex-start;
+      line-height: 1.3;
     }
 
-    h1 em {
-      font-style: italic;
-      color: var(--accent-dark);
+    .hero-tagline {
+      font-size: clamp(22px, 5vw, 30px);
+      font-weight: 500;
+      color: var(--ink);
+      line-height: 1.2;
     }
 
     .hero-sub {
-      font-size: 18px;
+      font-size: clamp(15px, 3vw, 17px);
       font-weight: 300;
-      color: var(--ink-light);
-      line-height: 1.65;
-      margin-bottom: 40px;
-      max-width: 440px;
+      color: var(--ink-mid);
+      line-height: 1.6;
+      max-width: 400px;
     }
 
     .cta-group {
       display: flex;
+      flex-direction: column;
       align-items: center;
-      gap: 20px;
-      flex-wrap: wrap;
+      gap: 12px;
     }
 
     .btn-primary {
       display: inline-flex;
       align-items: center;
       gap: 10px;
-      padding: 14px 28px;
+      padding: 14px 36px;
       background: var(--ink);
       color: var(--white);
-      border-radius: var(--radius);
+      border-radius: 100px;
       font-size: 15px;
       font-weight: 500;
       text-decoration: none;
-      transition: background 0.2s, transform 0.15s;
+      font-family: 'DM Sans', sans-serif;
+      transition: opacity 0.2s, transform 0.15s;
+    }
+    .btn-primary:hover { opacity: 0.82; transform: translateY(-1px); }
+
+    .cta-note { font-size: 12px; color: var(--ink-faint); }
+
+    /* ── BEAT SECTIONS ── */
+    .beat-section {
+      padding: 80px 48px;
+      max-width: 1080px;
+      margin: 0 auto;
     }
 
-    .btn-primary:hover {
-      background: #333;
-      transform: translateY(-1px);
+    .beat-section:nth-child(even) {
+      background: var(--dune);
+      max-width: 100%;
+      padding: 80px 0;
     }
 
-    .cta-note {
-      font-size: 13px;
+    .beat-section:nth-child(even) .beat-inner {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0 48px;
+    }
+
+    .beat-header {
+      margin-bottom: 40px;
+    }
+
+    .beat-eyebrow {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--rust);
+      margin-bottom: 10px;
+    }
+
+    .beat-headline {
+      font-family: 'Fredoka', sans-serif;
+      font-size: clamp(28px, 5vw, 42px);
+      font-weight: 600;
+      color: var(--ink);
+      line-height: 1.1;
+      letter-spacing: -0.01em;
+      margin-bottom: 8px;
+    }
+
+    .beat-cycle {
+      color: var(--rust);
+      font-style: italic;
+    }
+
+    .beat-sub {
+      font-size: 15px;
+      font-weight: 300;
+      color: var(--ink-mid);
+      line-height: 1.6;
+      max-width: 460px;
+    }
+
+    /* Example cards grid */
+    .examples-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+
+    .example-card {
+      background: var(--white);
+      border-radius: 18px;
+      padding: 22px 22px 26px;
+      border: 1px solid var(--dune);
+    }
+
+    .example-label {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
       color: var(--ink-faint);
+      margin-bottom: 14px;
     }
 
-    /* PHONE MOCKUP */
-    .hero-visual {
-      display: flex;
-      justify-content: center;
-    }
-
-    .phone {
-      width: 280px;
-      background: var(--ink);
-      border-radius: 40px;
-      padding: 20px 16px;
-      box-shadow: 0 40px 80px rgba(0,0,0,0.18), 0 0 0 1px rgba(255,255,255,0.05);
-      position: relative;
-    }
-
-    .phone-notch {
-      width: 80px;
-      height: 6px;
-      background: #333;
-      border-radius: 10px;
-      margin: 0 auto 20px;
-    }
-
-    .phone-screen {
-      background: #f0ede8;
-      border-radius: 24px;
-      padding: 16px;
-      min-height: 360px;
+    .sms-thread {
       display: flex;
       flex-direction: column;
-      gap: 10px;
-    }
-
-    .phone-header {
-      text-align: center;
-      padding-bottom: 12px;
-      border-bottom: 1px solid var(--border);
-      margin-bottom: 4px;
-    }
-
-    .phone-header-name {
-      font-size: 13px;
-      font-weight: 500;
-      color: var(--ink);
-    }
-
-    .phone-header-sub {
-      font-size: 11px;
-      color: var(--ink-faint);
-    }
-
-    .bubble {
-      max-width: 85%;
-      padding: 10px 14px;
-      border-radius: 18px;
-      font-size: 13px;
-      line-height: 1.45;
+      gap: 7px;
     }
 
     .bubble-user {
-      background: #007aff;
-      color: white;
+      background: var(--green);
+      color: #fff;
+      padding: 9px 13px;
+      border-radius: 16px 16px 3px 16px;
+      font-size: 13px;
+      line-height: 1.45;
       align-self: flex-end;
-      border-bottom-right-radius: 4px;
-      margin-left: auto;
+      max-width: 86%;
     }
 
     .bubble-scout {
-      background: white;
+      background: #EFEFEF;
       color: var(--ink);
+      padding: 9px 13px;
+      border-radius: 16px 16px 16px 3px;
+      font-size: 13px;
+      line-height: 1.45;
       align-self: flex-start;
-      border-bottom-left-radius: 4px;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+      max-width: 86%;
     }
 
-    .bubble-scout .maps-link {
+    .bubble-scout .maps {
       display: block;
-      margin-top: 6px;
+      margin-top: 3px;
       font-size: 11px;
       color: #007aff;
     }
 
-    .bubble-time {
-      font-size: 10px;
-      color: var(--ink-faint);
-      text-align: center;
-      margin: 2px 0;
-    }
-
-    /* SECTION SHARED */
-    section {
-      padding: 80px 40px;
-      max-width: 1100px;
+    /* ── JOIN ── */
+    .join-section {
+      padding: 80px 48px;
+      max-width: 1080px;
       margin: 0 auto;
     }
 
-    .section-label {
+    .section-eyebrow {
       font-size: 11px;
       font-weight: 500;
-      letter-spacing: 0.14em;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: var(--accent-dark);
-      margin-bottom: 16px;
+      color: var(--rust);
+      margin-bottom: 10px;
     }
 
-    h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(28px, 4vw, 40px);
-      font-weight: 400;
-      line-height: 1.2;
+    .section-title {
+      font-family: 'Fredoka', sans-serif;
+      font-size: clamp(24px, 4vw, 36px);
+      font-weight: 600;
       color: var(--ink);
-      margin-bottom: 16px;
+      line-height: 1.15;
+      margin-bottom: 10px;
+      letter-spacing: -0.01em;
     }
 
     .section-sub {
-      font-size: 17px;
+      font-size: 15px;
       font-weight: 300;
-      color: var(--ink-light);
-      max-width: 560px;
-      line-height: 1.65;
-      margin-bottom: 48px;
-    }
-
-    /* HOW IT WORKS */
-    .how-section {
-      background: var(--cream);
-      border-radius: 24px;
-      padding: 60px;
-      margin: 0 40px;
-      max-width: 1020px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    .steps {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 40px;
-      margin-top: 48px;
-    }
-
-    .step {
-      position: relative;
-    }
-
-    .step-number {
-      font-family: 'Playfair Display', serif;
-      font-size: 48px;
-      font-weight: 400;
-      color: var(--accent);
-      line-height: 1;
-      margin-bottom: 16px;
-      opacity: 0.7;
-    }
-
-    .step h3 {
-      font-size: 17px;
-      font-weight: 500;
-      color: var(--ink);
-      margin-bottom: 10px;
-    }
-
-    .step p {
-      font-size: 14px;
-      font-weight: 300;
-      color: var(--ink-light);
+      color: var(--ink-mid);
+      max-width: 400px;
       line-height: 1.6;
-    }
-
-    /* OPT-IN SECTION */
-    .optin-section {
-      border: 1.5px solid var(--border);
-      border-radius: 24px;
-      padding: 60px;
-      margin: 0 40px;
-      max-width: 1020px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    .optin-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 48px;
-      margin-top: 40px;
-    }
-
-    .optin-method {
-      background: var(--bg);
-      border-radius: var(--radius);
-      padding: 28px;
-      border: 1px solid var(--border);
-    }
-
-    .optin-method-icon {
-      width: 40px;
-      height: 40px;
-      background: var(--cream);
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 16px;
-      font-size: 18px;
-    }
-
-    .optin-method h3 {
-      font-size: 16px;
-      font-weight: 500;
-      color: var(--ink);
-      margin-bottom: 10px;
-    }
-
-    .optin-method p {
-      font-size: 14px;
-      font-weight: 300;
-      color: var(--ink-light);
-      line-height: 1.6;
-    }
-
-    .optin-method .example {
-      margin-top: 14px;
-      padding: 12px 16px;
-      background: var(--cream);
-      border-radius: 8px;
-      font-size: 13px;
-      color: var(--ink);
-      font-family: 'DM Sans', sans-serif;
-    }
-
-    /* COMPLIANCE */
-    .compliance-section {
-      background: var(--ink);
-      border-radius: 24px;
-      padding: 60px;
-      margin: 0 40px;
-      max-width: 1020px;
-      margin-left: auto;
-      margin-right: auto;
-      color: var(--white);
-    }
-
-    .compliance-section .section-label {
-      color: var(--accent);
-    }
-
-    .compliance-section h2 {
-      color: var(--white);
       margin-bottom: 40px;
     }
 
-    .compliance-grid {
+    .join-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 32px;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
     }
 
-    .compliance-item h3 {
-      font-size: 13px;
+    .join-card {
+      background: var(--dune);
+      border-radius: 18px;
+      padding: 30px 30px 34px;
+    }
+
+    .join-card-icon { font-size: 20px; margin-bottom: 12px; }
+
+    .join-card h3 {
+      font-size: 16px;
       font-weight: 500;
-      letter-spacing: 0.06em;
+      color: var(--ink);
+      margin-bottom: 8px;
+    }
+
+    .join-card p {
+      font-size: 14px;
+      font-weight: 300;
+      color: var(--ink-mid);
+      line-height: 1.65;
+    }
+
+    .join-card .example-msg {
+      margin-top: 14px;
+      background: var(--sand);
+      border-radius: 10px;
+      padding: 10px 13px;
+      font-size: 13px;
+      color: var(--ink-mid);
+      line-height: 1.55;
+    }
+
+    .compliance-note {
+      margin-top: 14px;
+      padding: 16px 20px;
+      background: var(--dune);
+      border-radius: 12px;
+      font-size: 13px;
+      color: var(--ink-mid);
+      line-height: 1.65;
+    }
+
+    /* ── MESSAGING ── */
+    .messaging-section {
+      padding: 80px 48px;
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+
+    .messaging-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-top: 40px;
+    }
+
+    .msg-card {
+      background: var(--dune);
+      border-radius: 18px;
+      padding: 26px 22px;
+    }
+
+    .msg-card h3 {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.09em;
       text-transform: uppercase;
-      color: var(--accent);
+      color: var(--rust);
       margin-bottom: 10px;
     }
 
-    .compliance-item p {
-      font-size: 14px;
+    .msg-card p {
+      font-size: 13px;
       font-weight: 300;
-      color: rgba(255,255,255,0.65);
-      line-height: 1.6;
+      color: var(--ink-mid);
+      line-height: 1.65;
     }
 
-    .compliance-item .keyword-tag {
-      display: inline-block;
-      padding: 4px 10px;
-      background: rgba(255,255,255,0.1);
-      border-radius: 6px;
-      font-size: 12px;
+    .keyword-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      margin-top: 12px;
+    }
+
+    .keyword-tag {
+      padding: 3px 8px;
+      background: rgba(28,26,23,0.08);
+      border-radius: 4px;
+      font-size: 11px;
       font-family: monospace;
-      color: rgba(255,255,255,0.8);
-      margin: 3px 3px 0 0;
+      color: var(--ink-mid);
     }
 
-    /* FOOTER */
+    /* ── FOOTER ── */
     footer {
-      padding: 48px 40px;
-      max-width: 1100px;
-      margin: 0 auto;
+      padding: 36px 48px;
+      max-width: 1080px;
+      margin: 60px auto 0;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      border-top: 1px solid var(--border);
-      margin-top: 80px;
+      border-top: 1px solid var(--dune);
+      flex-wrap: wrap;
+      gap: 16px;
     }
 
     .footer-logo {
-      font-family: 'Playfair Display', serif;
-      font-size: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      width: 100px;
+    }
+
+    .footer-bubble-green {
+      background: var(--green);
+      color: #fff;
+      font-size: 9px;
+      font-weight: 500;
+      padding: 3px 8px;
+      border-radius: 8px 8px 2px 8px;
+      display: inline-block;
+      align-self: flex-end;
+    }
+
+    .footer-bubble-grey {
+      background: #DDDDD8;
       color: var(--ink);
+      font-size: 9px;
+      font-weight: 400;
+      padding: 3px 8px;
+      border-radius: 8px 8px 8px 2px;
+      display: inline-block;
+      align-self: flex-start;
     }
 
     .footer-links {
       display: flex;
-      gap: 28px;
+      gap: 24px;
       list-style: none;
+      flex-wrap: wrap;
     }
 
     .footer-links a {
@@ -474,44 +484,49 @@
       text-decoration: none;
       transition: color 0.2s;
     }
-
     .footer-links a:hover { color: var(--ink); }
 
-    .footer-copy {
-      font-size: 12px;
-      color: var(--ink-faint);
-    }
+    .footer-copy { font-size: 12px; color: var(--ink-faint); }
 
-    /* SPACER */
-    .section-spacer {
-      height: 40px;
-    }
-
-    /* RESPONSIVE */
+    /* ── RESPONSIVE ── */
     @media (max-width: 768px) {
-      nav { padding: 16px 20px; }
+      nav { padding: 12px 20px; }
       .nav-links { display: none; }
-      .hero { padding: 100px 20px 60px; }
-      .hero-inner { grid-template-columns: 1fr; gap: 48px; }
-      .hero-visual { display: none; }
-      section { padding: 60px 20px; }
-      .how-section, .optin-section, .compliance-section { padding: 40px 24px; margin: 0 20px; }
-      .steps { grid-template-columns: 1fr; gap: 32px; }
-      .optin-grid { grid-template-columns: 1fr; gap: 20px; }
-      .compliance-grid { grid-template-columns: 1fr; gap: 24px; }
-      footer { flex-direction: column; gap: 20px; text-align: center; }
-      .footer-links { flex-wrap: wrap; justify-content: center; }
+      .hero { padding: 100px 24px 60px; }
+      .beat-section { padding: 60px 20px; }
+      .beat-section:nth-child(even) { padding: 60px 0; }
+      .beat-section:nth-child(even) .beat-inner { padding: 0 20px; }
+      .examples-grid { grid-template-columns: 1fr; }
+      .join-section, .messaging-section { padding: 60px 20px; }
+      .join-grid { grid-template-columns: 1fr; }
+      .messaging-grid { grid-template-columns: 1fr; }
+      footer { padding: 28px 20px; flex-direction: column; align-items: flex-start; }
+    }
+
+    /* ── CYCLING WORDS ── */
+    .cycling-word {
+      display: inline-block;
+      transition: opacity 0.3s ease;
+    }
+    .cycling-word.fade {
+      opacity: 0;
     }
   </style>
 </head>
 <body>
 
+  <!-- NAV -->
   <nav>
-    <a href="#" class="nav-logo">Scout</a>
+    <a href="#" class="nav-logo">
+      <span class="nav-bubble-green">hey Scout</span>
+      <span class="nav-bubble-grey">text. ask. link.</span>
+    </a>
     <ul class="nav-links">
-      <li><a href="#how-it-works">How it works</a></li>
+      <li><a href="#text-scout">Text</a></li>
+      <li><a href="#ask-scout">Ask</a></li>
+      <li><a href="#link-scout">Link</a></li>
       <li><a href="#join">Join</a></li>
-      <li><a href="#compliance">Messaging</a></li>
+      <li><a href="#messaging">Messaging</a></li>
       <li><a href="20260509.scout-privacy-policy.html">Privacy</a></li>
       <li><a href="20260509.scout-terms-of-service.html">Terms</a></li>
     </ul>
@@ -520,123 +535,185 @@
   <!-- HERO -->
   <div class="hero">
     <div class="hero-inner">
-      <div class="hero-text">
-        <span class="hero-eyebrow">Invite only · San Diego</span>
-        <h1>The recommendation your <em>people</em> already know</h1>
-        <p class="hero-sub">Scout remembers every great place your trusted friends love — and surfaces the right one when you need it. No app. No strangers' reviews. Just text.</p>
-        <div class="cta-group">
-          <a href="sms:+16163135900" class="btn-primary">
-            <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/></svg>
-            Text Scout to join
-          </a>
-          <span class="cta-note">Invite required · SMS only</span>
-        </div>
+
+      <div class="hero-logo">
+        <div class="hero-bubble-green">hey Scout</div>
+        <div class="hero-bubble-grey">text. ask. link. anything</div>
       </div>
 
-      <div class="hero-visual">
-        <div class="phone">
-          <div class="phone-notch"></div>
-          <div class="phone-screen">
-            <div class="phone-header">
-              <div class="phone-header-name">Scout</div>
-              <div class="phone-header-sub">616-313-5900</div>
-            </div>
+      <div class="hero-tagline"><em>Never lose a great find again.</em></div>
 
-            <div class="bubble bubble-user">good Italian in Little Italy?</div>
-            <div class="bubble bubble-scout">
-              Juniper is your move — you said it was perfect for a date night.
-              <span class="maps-link">maps.google.com/...</span>
-            </div>
+      <p class="hero-sub">Your memory for places, services, and things worth knowing — and what the people you trust actually love.</p>
 
-            <div class="bubble-time">2 min later</div>
+      <div class="cta-group">
+        <a href="sms:+16163135900" class="btn-primary">
+          <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/></svg>
+          Text Scout to join
+        </a>
+        <span class="cta-note">Invite only · SMS only · 616-313-5900</span>
+      </div>
 
-            <div class="bubble bubble-user">just had amazing tacos at Las Cuatro Milpas — so good</div>
-            <div class="bubble bubble-scout">
-              Got it — Las Cuatro Milpas in Barrio Logan. Mexican, incredible tacos. Sound right?
-            </div>
+    </div>
+  </div>
+
+  <!-- BEAT 1 — TEXT -->
+  <div class="beat-section" id="text-scout">
+    <div class="beat-header">
+      <div class="beat-eyebrow">01 — Text Scout</div>
+      <div class="beat-headline">what you <span class="beat-cycle">love</span></div>
+      <p class="beat-sub"><em>it remembers everything for you</em></p>
+    </div>
+    <div class="examples-grid">
+      <div class="example-card">
+        <div class="example-label">A dinner spot</div>
+        <div class="sms-thread">
+          <div class="bubble-user">just had the best tacos at Las Cuatro Milpas in Barrio Logan. unreal</div>
+          <div class="bubble-scout">Got it — Las Cuatro Milpas in Barrio Logan. Mexican, incredible tacos.</div>
+        </div>
+      </div>
+      <div class="example-card">
+        <div class="example-label">A service</div>
+        <div class="sms-thread">
+          <div class="bubble-user">Mike's Plumbing in San Diego — super reliable, fair price, ask for Mike</div>
+          <div class="bubble-scout">Saved — Mike's Plumbing, San Diego. Reliable, fair price, ask for Mike.</div>
+        </div>
+      </div>
+      <div class="example-card">
+        <div class="example-label">Something to watch</div>
+        <div class="sms-thread">
+          <div class="bubble-user">just finished Hacks — one of the best comedies I've watched</div>
+          <div class="bubble-scout">Saved — Hacks. One of the best comedies you've watched.</div>
+        </div>
+      </div>
+      <div class="example-card">
+        <div class="example-label">A want-to-try</div>
+        <div class="sms-thread">
+          <div class="bubble-user">been wanting to try Juniper & Ivy forever</div>
+          <div class="bubble-scout">On your list — Juniper & Ivy. I'll let you know if anyone in your circle has been.<span class="maps">maps.google.com/...</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BEAT 2 — ASK -->
+  <div class="beat-section" id="ask-scout">
+    <div class="beat-inner">
+      <div class="beat-header">
+        <div class="beat-eyebrow">02 — Ask Scout</div>
+        <div class="beat-headline">for a great <span class="beat-cycle cycling-word" id="cycle-2">Italian spot</span></div>
+        <p class="beat-sub"><em>it knows what you and your people love</em></p>
+      </div>
+      <div class="examples-grid">
+        <div class="example-card">
+          <div class="example-label">Your own memory</div>
+          <div class="sms-thread">
+            <div class="bubble-user">good date night spot in Little Italy?</div>
+            <div class="bubble-scout">Juniper &amp; Ivy is your move — you said it was perfect for a date night.<span class="maps">maps.google.com/...</span></div>
+          </div>
+        </div>
+        <div class="example-card">
+          <div class="example-label">A friend's rec</div>
+          <div class="sms-thread">
+            <div class="bubble-user">any good coffee spots?</div>
+            <div class="bubble-scout">Gia swears by Mnemonic in Bankers Hill — quiet, great pour overs.<span class="maps">maps.google.com/...</span></div>
+          </div>
+        </div>
+        <div class="example-card">
+          <div class="example-label">A trusted service</div>
+          <div class="sms-thread">
+            <div class="bubble-user">need a good plumber in San Diego</div>
+            <div class="bubble-scout">Andy uses Mike's Plumbing — says he's super reliable and fair on price.<span class="maps">maps.google.com/...</span></div>
+          </div>
+        </div>
+        <div class="example-card">
+          <div class="example-label">While travelling</div>
+          <div class="sms-thread">
+            <div class="bubble-user">heading to Austin next week — any recs?</div>
+            <div class="bubble-scout">Rob loves Uchi in Austin — says it's the best omakase he's had outside Japan.<span class="maps">maps.google.com/...</span></div>
           </div>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="section-spacer"></div>
-
-  <!-- HOW IT WORKS -->
-  <div class="how-section" id="how-it-works">
-    <div class="section-label">How it works</div>
-    <h2>Save it. Ask it. Trust it.</h2>
-    <p class="section-sub">Scout is a recommendation memory that lives in your text messages. Three things, that's it.</p>
-
-    <div class="steps">
-      <div class="step">
-        <div class="step-number">01</div>
-        <h3>Save what you love</h3>
-        <p>Text Scout naturally — "just had incredible pasta at Juniper in Little Italy, perfect for a date." Scout extracts everything and remembers it for you.</p>
+  <!-- BEAT 3 — LINK -->
+  <div class="beat-section" id="link-scout">
+    <div class="beat-header">
+      <div class="beat-eyebrow">03 — Link Scout</div>
+      <div class="beat-headline">with your <span class="beat-cycle">people</span></div>
+      <p class="beat-sub"><em>their best finds become yours</em></p>
+    </div>
+    <div class="examples-grid">
+      <div class="example-card">
+        <div class="example-label">Adding someone</div>
+        <div class="sms-thread">
+          <div class="bubble-user">Add Gia 6195550192</div>
+          <div class="bubble-scout">Done — Gia's in. Share your code JOSH or your number so friends can add you.</div>
+        </div>
       </div>
-      <div class="step">
-        <div class="step-number">02</div>
-        <h3>Ask for a recommendation</h3>
-        <p>"Good Italian in Little Italy?" Scout surfaces the best answer from your history and your trusted connections — with their name attached.</p>
+      <div class="example-card">
+        <div class="example-label">Joining via code</div>
+        <div class="sms-thread">
+          <div class="bubble-user">JOSH</div>
+          <div class="bubble-scout">Hey, I'm Scout — Josh added you. Tell me somewhere you love and I'll remember it. Reply STOP to opt out anytime.</div>
+        </div>
       </div>
-      <div class="step">
-        <div class="step-number">03</div>
-        <h3>Your circle grows smarter</h3>
-        <p>Every recommendation your connections add makes Scout more useful for you. Real people, real experiences, real trust.</p>
+      <div class="example-card">
+        <div class="example-label">When a rec lands</div>
+        <div class="sms-thread">
+          <div class="bubble-user">finally tried that coffee place Gia recommended — she was right</div>
+          <div class="bubble-scout">Logged — Mnemonic is yours now too, alongside Gia's. Glad it delivered.</div>
+        </div>
+      </div>
+      <div class="example-card">
+        <div class="example-label">Closing the loop</div>
+        <div class="sms-thread">
+          <div class="bubble-scout">Andy went to Uchi based on your rec — loved it.</div>
+        </div>
       </div>
     </div>
   </div>
 
-  <div class="section-spacer"></div>
+  <!-- JOIN -->
+  <div class="join-section" id="join">
+    <div class="section-eyebrow">How to join</div>
+    <div class="section-title">Two ways in — both invite only</div>
+    <p class="section-sub">Scout is a closed service. You join by knowing someone already on it.</p>
 
-  <!-- HOW TO JOIN -->
-  <div class="optin-section" id="join">
-    <div class="section-label">How to join</div>
-    <h2>Two ways in — both invite-only</h2>
-    <p class="section-sub">Scout is a closed, invite-only service. You join by knowing someone already on it. Messaging consent is explicit and opt-in by design.</p>
-
-    <div class="optin-grid">
-      <div class="optin-method">
-        <div class="optin-method-icon">👋</div>
+    <div class="join-grid">
+      <div class="join-card">
+        <div class="join-card-icon">👋</div>
         <h3>Added by a friend</h3>
-        <p>An existing Scout user adds you directly by texting their Scout number with your name and phone number. You receive one introductory message from Scout explaining the service and how to opt out. By replying, you confirm enrollment.</p>
-        <div class="example">
-          Scout: "Hey [Name], [Friend] added you to Scout — tell me somewhere you love and I'll remember it. Reply STOP to opt out anytime."
-        </div>
+        <p>An existing Scout user adds you by texting your name and number to Scout. You'll get one message introducing the service and how to opt out. Replying is your confirmation.</p>
+        <div class="example-msg">Scout: "Hey Andy, Josh added you to Scout — tell me somewhere you love and I'll remember it. Reply STOP to opt out anytime."</div>
       </div>
-      <div class="optin-method">
-        <div class="optin-method-icon">🔑</div>
+      <div class="join-card">
+        <div class="join-card-icon">🔑</div>
         <h3>Use a personal invite code</h3>
-        <p>Every Scout user has a personal code (like JOSH or GIA). If someone shares their code with you, text it to the Scout number. You're connected instantly and asked for your name. Initiating contact is your opt-in.</p>
-        <div class="example">
-          You text: JOSH<br>
-          Scout: "Hey — I'm Scout. What's your first name?"
-        </div>
+        <p>Every Scout user has a personal code — like JOSH or GIA. If someone shares theirs, text it to 616-313-5900. You're connected instantly. Initiating contact is your opt-in.</p>
+        <div class="example-msg">You text: JOSH<br>Scout: "Hey — I'm Scout. What's your first name?"</div>
       </div>
     </div>
 
-    <div style="margin-top: 32px; padding: 20px 24px; background: var(--cream); border-radius: var(--radius); font-size: 14px; color: var(--ink-light); line-height: 1.65;">
-      <strong style="color: var(--ink);">Scout's SMS number:</strong> 616-313-5900<br>
-      Standard message and data rates from your carrier may apply. Scout sends only conversational recommendation messages — no marketing blasts, no promotions, no third-party ads. Reply <strong>STOP</strong> at any time to permanently opt out.
+    <div class="compliance-note">
+      <strong>Scout's SMS number:</strong> 616-313-5900 · Standard message and data rates may apply. Scout sends only conversational recommendation messages — no marketing, no promotions, no third-party ads. Reply <strong>STOP</strong> at any time to permanently opt out.
     </div>
   </div>
 
-  <div class="section-spacer"></div>
+  <!-- MESSAGING -->
+  <div class="messaging-section" id="messaging">
+    <div class="section-eyebrow">Messaging guidelines</div>
+    <div class="section-title">How Scout messages you</div>
 
-  <!-- COMPLIANCE -->
-  <div class="compliance-section" id="compliance">
-    <div class="section-label">Messaging guidelines</div>
-    <h2>How Scout messages you</h2>
-
-    <div class="compliance-grid">
-      <div class="compliance-item">
+    <div class="messaging-grid">
+      <div class="msg-card">
         <h3>Message types</h3>
-        <p>Scout sends only direct responses to your messages — recommendation replies, confirmations, and the occasional one-time re-engagement if you've gone quiet. No bulk messages. No marketing. No third-party promotions.</p>
+        <p>Scout sends only direct responses to your messages — recommendation replies, confirmations, and a one-time re-engagement if you've gone quiet. No bulk messages. No marketing. No third-party promotions.</p>
       </div>
-      <div class="compliance-item">
-        <h3>Opt-out anytime</h3>
-        <p>Reply STOP to immediately and permanently unsubscribe. You will receive no further messages. Reply START to re-subscribe. Reply HELP for assistance. These commands always work.</p>
-        <div style="margin-top: 12px;">
+      <div class="msg-card">
+        <h3>Opt out anytime</h3>
+        <p>Reply STOP to immediately and permanently unsubscribe. Reply START to re-subscribe. Reply HELP for assistance. These commands always work.</p>
+        <div class="keyword-tags">
           <span class="keyword-tag">STOP</span>
           <span class="keyword-tag">QUIT</span>
           <span class="keyword-tag">CANCEL</span>
@@ -647,24 +724,52 @@
           <span class="keyword-tag">INFO</span>
         </div>
       </div>
-      <div class="compliance-item">
+      <div class="msg-card">
         <h3>Your data</h3>
-        <p>Your phone number is your identity in Scout. Your recommendations are private — visible only to you and the connections you've opted into. We never sell or share your data. Full details in our Privacy Policy.</p>
+        <p>Your phone number is your identity in Scout. Your recommendations are private — visible only to you and the connections you've opted into. We never sell or share your data.</p>
       </div>
     </div>
   </div>
 
-  <div class="section-spacer"></div>
-
   <!-- FOOTER -->
   <footer>
-    <div class="footer-logo">Scout</div>
+    <div class="footer-logo">
+      <span class="footer-bubble-green">hey Scout</span>
+      <span class="footer-bubble-grey">text. ask. link.</span>
+    </div>
     <ul class="footer-links">
       <li><a href="20260509.scout-privacy-policy.html">Privacy Policy</a></li>
       <li><a href="20260509.scout-terms-of-service.html">Terms of Service</a></li>
+      <li><a href="mailto:hello@joinscout.io">Contact</a></li>
     </ul>
     <div class="footer-copy">© 2026 Scout. San Diego, CA.</div>
   </footer>
 
+
+  <script>
+    const cycles = {
+      'cycle-1': ['love', 'like', 'want to try', 'want to avoid'],
+      'cycle-2': ['Italian spot', 'plumber', 'coffee shop', 'TV show', 'hotel'],
+      'cycle-3': ['people', 'friends', 'family', 'colleagues']
+    };
+
+    const indices = { 'cycle-1': 0, 'cycle-2': 0, 'cycle-3': 0 };
+
+    function cycleWord(id) {
+      const el = document.getElementById(id);
+      if (!el) return;
+      el.classList.add('fade');
+      setTimeout(() => {
+        indices[id] = (indices[id] + 1) % cycles[id].length;
+        el.textContent = cycles[id][indices[id]];
+        el.classList.remove('fade');
+      }, 300);
+    }
+
+    // Stagger start times so all three don't fire simultaneously
+    setTimeout(() => setInterval(() => cycleWord('cycle-1'), 2200), 0);
+    setTimeout(() => setInterval(() => cycleWord('cycle-2'), 2200), 700);
+    setTimeout(() => setInterval(() => cycleWord('cycle-3'), 2200), 1400);
+  </script>
 </body>
 </html>
